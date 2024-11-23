@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shayari</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #fde8d0, #f8d9c8);
+      color: #333;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Glowing Shayari Container */
+    .container {
+      text-align: center;
+      padding: 30px;
+      border-radius: 15px;
+      background-color: rgba(255, 245, 230, 0.95);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      position: relative;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 12px 25px rgba(255, 182, 85, 0.6);
+      }
+      100% {
+        box-shadow: 0 12px 35px rgba(255, 182, 85, 1);
+      }
+    }
+
+    .container:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #ffd700, #fda65a);
+      z-index: -1;
+      border-radius: 15px;
+      filter: blur(25px);
+    }
+
+    .title {
+      font-size: 2rem;
+      color: #ff6347;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .typing {
+      font-size: 1.4rem;
+      color: #444;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      overflow: hidden;
+      border-right: 2px solid #ff6347;
+      animation: blink-caret 0.6s step-end infinite;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes blink-caret {
+      from, to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #ff6347;
+      }
+    }
+
+    /* Falling Particles */
+    .particle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: rgba(255, 182, 85, 0.8);
+      border-radius: 50%;
+      animation: fall linear infinite;
+    }
+
+    .particle:nth-child(1) {
+      left: 20%;
+      animation-duration: 5s;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      left: 40%;
+      animation-duration: 7s;
+      animation-delay: 1s;
+    }
+
+    .particle:nth-child(3) {
+      left: 60%;
+      animation-duration: 6s;
+      animation-delay: 2s;
+    }
+
+    .particle:nth-child(4) {
+      left: 80%;
+      animation-duration: 4s;
+      animation-delay: 3s;
+    }
+
+    @keyframes fall {
+      from {
+        top: -10px;
+        opacity: 1;
+      }
+      to {
+        top: 100vh;
+        opacity: 0;
+      }
+    }
+
+    /* "WRITTEN FOR SIMRAN" Styling */
+    .dedication {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.8rem;
+      color: #ff6347;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Dedication Text -->
+  <div class="dedication">WRITTEN FOR SIMRAN</div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="title">Meri Shayari</div>
+    <div class="typing" id="typing"></div>
+  </div>
+
+  <!-- Falling Particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <script>
+    // The Shayari lines
+    const lines = [
+      "Teri hansi mein jaadu hai, dil ko chura le jaati hai,",
+      "Bina kuch kahe hi saari baat samjha jaati hai.",
+      "Tere gaalon ka gulabi rang sab kuch bhula deta hai,",
+      "Lagta hai jaise zindagi mein thoda rang bhar deta hai.",
+      "Teri zulfon se khelta hawa ka jhonka bhi sharma jaaye,",
+      "Tujhe dekh kar lagta hai waqt wahi tham jaaye.",
+      "Tere saath har baat mein ek nayi baat milti hai,",
+      "Lagta hai jaise zindagi ko meri mulaqat milti hai."
+    ];
+
+    const typingElement = document.getElementById("typing");
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+      if (lineIndex < lines.length) {
+        const currentLine = lines[lineIndex];
+        if (charIndex < currentLine.length) {
+          typingElement.textContent += currentLine[charIndex];
+          charIndex++;
+          setTimeout(type, 50); // Speed of typing each character
+        } else {
+          // Move to the next line
+          typingElement.textContent += "\n";
+          charIndex = 0;
+          lineIndex++;
+          setTimeout(type, 800); // Pause before the next line starts typing
+        }
+      }
+    }
+
+    // Start the typing effect
+    window.onload = type;
+  </script>
+</body>
+	</html>
